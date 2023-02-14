@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:todo_app_flutter/constants/colors/app_colors.dart';
 import 'package:todo_app_flutter/view/home/screen/home_screen.dart';
 
 class MainScreen extends StatelessWidget {
@@ -8,8 +9,26 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  GetMaterialApp(
-        locale: Locale("fa"),
+        locale: const Locale("fa"),
         debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          inputDecorationTheme: InputDecorationTheme(
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: AppColors.lightYellowColor)
+            ),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(8),
+                borderSide: BorderSide(color: AppColors.lightYellowColor)
+            ),
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ButtonStyle(
+              backgroundColor: MaterialStatePropertyAll(AppColors.lightYellowColor),
+              minimumSize: const MaterialStatePropertyAll(Size(double.infinity,50))
+            )
+          )
+        ),
         home: HomeScreen()
     );
   }

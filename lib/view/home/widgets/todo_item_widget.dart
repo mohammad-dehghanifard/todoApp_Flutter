@@ -6,7 +6,7 @@ import 'package:todo_app_flutter/view/home/widgets/custom_check_box_widget.dart'
 Widget todoItemWidget(BuildContext context) {
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 12),
-    margin: const EdgeInsets.only(bottom: 8),
+    margin: const EdgeInsets.only(bottom: 16),
     width: MediaQuery.of(context).size.width,
     height: 100,
     decoration: BoxDecoration(
@@ -23,9 +23,9 @@ Widget todoItemWidget(BuildContext context) {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("عنوان",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: AppColors.textColor,fontFamily: "LaleZar"),),
+              Text("عنوان",style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: AppColors.textColor,fontFamily: "Dirooz"),),
               const SizedBox(height: 4),
-              Text("متن توضیحات",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: AppColors.textColor,fontFamily: "LaleZar"),)
+              Text("متن توضیحات",style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: AppColors.textColor,fontFamily: "Dirooz"),)
             ],
           ),
         ),
