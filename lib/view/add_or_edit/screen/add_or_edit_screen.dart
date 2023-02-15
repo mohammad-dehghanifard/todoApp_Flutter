@@ -19,6 +19,7 @@ class AddOrEditTodoScreen extends StatelessWidget {
         child: Column(
           children:  [
              TextField(
+              style: const TextStyle(color: Colors.white,fontFamily: "Dirooz"),
               decoration: InputDecoration(
                   filled: true,
                   fillColor: AppColors.lightYellowColor,

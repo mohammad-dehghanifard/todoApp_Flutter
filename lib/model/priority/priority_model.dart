@@ -1,5 +1,7 @@
 import 'package:hive/hive.dart';
 
+part 'priority_model.g.dart';
+
 @HiveType(typeId: 2)
 enum PriorityModel{
   @HiveField(0)
