@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app_flutter/constants/colors/app_colors.dart';
+import 'package:todo_app_flutter/view/add_or_edit/widget/priority_task_widget.dart';
 
 class AddOrEditTodoScreen extends StatelessWidget {
   const AddOrEditTodoScreen({Key? key}) : super(key: key);
@@ -27,13 +28,22 @@ class AddOrEditTodoScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             const TextField(
-              maxLines: 8,
+              maxLines: 3,
               decoration: InputDecoration(
                 hintText: "توضیحات....",
                 hintStyle: const TextStyle(fontSize: 14,fontFamily: 'Dirooz')
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                PriorityTask(title: "عادی"),
+                PriorityTask(title: "معمولی"),
+                PriorityTask(title: "مهم"),
+              ],
+            ),
+            const SizedBox(height: 12),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_app_flutter/constants/colors/app_colors.dart';
-import 'package:todo_app_flutter/view/add_or_edit/add_or_edit_screen.dart';
+import 'package:todo_app_flutter/view/add_or_edit/screen/add_or_edit_screen.dart';
 import 'package:todo_app_flutter/view/home/widgets/todo_item_widget.dart';
 
 class HomeScreen extends StatelessWidget {
