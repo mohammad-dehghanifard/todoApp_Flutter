@@ -15,12 +15,12 @@ class AddOrEditTodoScreen extends StatefulWidget {
 }
 
 class _AddOrEditTodoScreenState extends State<AddOrEditTodoScreen> {
-  HiveDataBaseController controller = Get.put(HiveDataBaseController());
+  final HiveDataBaseController dbController = Get.find<HiveDataBaseController>();
   @override
   void initState() {
-    controller.task = Get.arguments;
-    controller.taskTitleTextFieldController.text = controller.task.title;
-    controller.descriptionTextFieldController.text = controller.task.description;
+    dbController.task = Get.arguments;
+    dbController.taskTitleTextFieldController.text = dbController.task.title;
+    dbController.descriptionTextFieldController.text = dbController.task.description;
     super.initState();
   }
 
@@ -29,7 +29,7 @@ class _AddOrEditTodoScreenState extends State<AddOrEditTodoScreen> {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
-        title: const Text("Add Todo"),
+        title: Text(dbController.task.title == ''? "Add Todo" : "Edit Task"),
         centerTitle: true,
         backgroundColor: AppColors.lightYellowColor,
       ),
@@ -38,7 +38,7 @@ class _AddOrEditTodoScreenState extends State<AddOrEditTodoScreen> {
         child: Column(
           children:  [
              TextField(
-               controller: controller.taskTitleTextFieldController,
+               controller: dbController.taskTitleTextFieldController,
               style: const TextStyle(color: Colors.white,fontFamily: "Dirooz"),
               decoration: InputDecoration(
                   filled: true,
@@ -49,11 +49,11 @@ class _AddOrEditTodoScreenState extends State<AddOrEditTodoScreen> {
             ),
             const SizedBox(height: 16),
              TextField(
-              controller: controller.descriptionTextFieldController,
+              controller: dbController.descriptionTextFieldController,
               maxLines: 3,
               decoration: const InputDecoration(
                 hintText: "توضیحات....",
-                hintStyle: const TextStyle(fontSize: 14,fontFamily: 'Dirooz')
+                hintStyle: TextStyle(fontSize: 14,fontFamily: 'Dirooz')
               ),
             ),
             const SizedBox(height: 12),
@@ -63,18 +63,18 @@ class _AddOrEditTodoScreenState extends State<AddOrEditTodoScreen> {
                 children:  [
                   PriorityTask(
                       title: "عادی",
-                      selected: controller.taskPriority.value == PriorityModel.low,
-                      onTap: () => controller.taskPriority.value = PriorityModel.low,
+                      selected: dbController.taskPriority.value == PriorityModel.low,
+                      onTap: () => dbController.taskPriority.value = PriorityModel.low,
                   ),
                   PriorityTask(
                       title: "معمولی",
-                      selected: controller.taskPriority.value == PriorityModel.normal,
-                      onTap: () => controller.taskPriority.value = PriorityModel.normal,
+                      selected: dbController.taskPriority.value == PriorityModel.normal,
+                      onTap: () => dbController.taskPriority.value = PriorityModel.normal,
                   ),
                   PriorityTask(
                       title: "مهم",
-                      selected: controller.taskPriority.value == PriorityModel.height,
-                      onTap: () => controller.taskPriority.value = PriorityModel.height,
+                      selected: dbController.taskPriority.value == PriorityModel.height,
+                      onTap: () => dbController.taskPriority.value = PriorityModel.height,
                   ),
                 ],
               ),
@@ -83,10 +83,8 @@ class _AddOrEditTodoScreenState extends State<AddOrEditTodoScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                onPressed: () {
-                  controller.addOrEditTask();
-                  },
-                child: const Text("اضافه کردن",style: TextStyle(fontSize: 20,fontFamily: "Dirooz"),),
+                onPressed: () => dbController.addOrEditTask(),
+                child:  Text(dbController.task.title == "" ?"اضافه کردن" : "ویرایش",style: const TextStyle(fontSize: 20,fontFamily: "Dirooz"),),
               ),
             ),
           ],

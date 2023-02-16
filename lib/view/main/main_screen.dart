@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_app_flutter/constants/colors/app_colors.dart';
 import 'package:todo_app_flutter/constants/routes/routs_pages.dart';
+import 'package:todo_app_flutter/controller/bindig_controllers/binding_controllers.dart';
 import 'package:todo_app_flutter/view/add_or_edit/screen/add_or_edit_screen.dart';
 import 'package:todo_app_flutter/view/home/screen/home_screen.dart';
 
@@ -11,6 +12,7 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  GetMaterialApp(
+        initialBinding: BindingControllers(),
         locale: const Locale("fa"),
         debugShowCheckedModeBanner: false,
         theme: ThemeData(

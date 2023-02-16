@@ -13,8 +13,8 @@ class CustomCheckBox extends StatelessWidget {
       onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 500),
-        width: 30,
-        height: 30,
+        width: 25,
+        height: 25,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           border: Border.all(color: AppColors.lightYellowColor),

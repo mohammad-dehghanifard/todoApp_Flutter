@@ -15,11 +15,12 @@ Widget todoItemWidget(BuildContext context,TaskModel taskItem) {
     onLongPress: () => controller.deleteTask(taskItem),
     child: Container(
       padding: const EdgeInsets.symmetric(horizontal: 12),
-      margin: const EdgeInsets.only(bottom: 16),
+      margin: const EdgeInsets.fromLTRB(12,0,12,16),
       width: MediaQuery.of(context).size.width,
       height: 100,
       decoration: BoxDecoration(
           color: AppColors.primaryColor,
+          borderRadius: BorderRadius.circular(12),
           boxShadow: [
             BoxShadow(color: AppColors.textColor.withOpacity(0.2),blurRadius: 10)
           ]
@@ -32,9 +33,9 @@ Widget todoItemWidget(BuildContext context,TaskModel taskItem) {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(taskItem.title,style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: AppColors.textColor,fontFamily: "Dirooz"),),
+                Text(taskItem.title,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold,color: AppColors.textColor,fontFamily: "Dirooz"),),
                 const SizedBox(height: 4),
-                Text(taskItem.description,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: AppColors.textColor,fontFamily: "Dirooz"),)
+                Text(taskItem.description,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w200,color: AppColors.textColor,fontFamily: "Dirooz"),)
               ],
             ),
           ),
