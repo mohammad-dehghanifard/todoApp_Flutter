@@ -3,15 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:todo_app_flutter/constants/colors/app_colors.dart';
 
 class CustomCheckBox extends StatelessWidget {
-  bool taskDone = false;
-  CustomCheckBox({required this.taskDone,Key? key}) : super(key: key);
+  final bool taskDone;
+  Function() onTap;
+  CustomCheckBox({required this.taskDone,required this.onTap,Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-
-      },
+      onTap: onTap,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 500),
         width: 30,

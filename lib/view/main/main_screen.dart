@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_app_flutter/constants/colors/app_colors.dart';
+import 'package:todo_app_flutter/constants/routes/routs_pages.dart';
+import 'package:todo_app_flutter/view/add_or_edit/screen/add_or_edit_screen.dart';
 import 'package:todo_app_flutter/view/home/screen/home_screen.dart';
 
 class MainScreen extends StatelessWidget {
@@ -29,6 +31,9 @@ class MainScreen extends StatelessWidget {
             )
           )
         ),
+        getPages: [
+          GetPage(name: RoutePages.addOrEditPageRoute, page: () => const AddOrEditTodoScreen())
+        ],
         home: HomeScreen()
     );
   }

@@ -1,9 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:todo_app_flutter/constants/colors/app_colors.dart';
+import 'package:todo_app_flutter/controller/data_base/data_base_controller.dart';
+import 'package:todo_app_flutter/model/priority/priority_model.dart';
 import 'package:todo_app_flutter/view/add_or_edit/widget/priority_task_widget.dart';
 
-class AddOrEditTodoScreen extends StatelessWidget {
+class AddOrEditTodoScreen extends StatefulWidget {
   const AddOrEditTodoScreen({Key? key}) : super(key: key);
+
+  @override
+  State<AddOrEditTodoScreen> createState() => _AddOrEditTodoScreenState();
+}
+
+class _AddOrEditTodoScreenState extends State<AddOrEditTodoScreen> {
+  HiveDataBaseController controller = Get.put(HiveDataBaseController());
+  @override
+  void initState() {
+    controller.task = Get.arguments;
+    controller.taskTitleTextFieldController.text = controller.task.title;
+    controller.descriptionTextFieldController.text = controller.task.description;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +38,7 @@ class AddOrEditTodoScreen extends StatelessWidget {
         child: Column(
           children:  [
              TextField(
+               controller: controller.taskTitleTextFieldController,
               style: const TextStyle(color: Colors.white,fontFamily: "Dirooz"),
               decoration: InputDecoration(
                   filled: true,
@@ -28,27 +48,44 @@ class AddOrEditTodoScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            const TextField(
+             TextField(
+              controller: controller.descriptionTextFieldController,
               maxLines: 3,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "توضیحات....",
                 hintStyle: const TextStyle(fontSize: 14,fontFamily: 'Dirooz')
               ),
             ),
             const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                PriorityTask(title: "عادی"),
-                PriorityTask(title: "معمولی"),
-                PriorityTask(title: "مهم"),
-              ],
+            Obx(
+              ()=> Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children:  [
+                  PriorityTask(
+                      title: "عادی",
+                      selected: controller.taskPriority.value == PriorityModel.low,
+                      onTap: () => controller.taskPriority.value = PriorityModel.low,
+                  ),
+                  PriorityTask(
+                      title: "معمولی",
+                      selected: controller.taskPriority.value == PriorityModel.normal,
+                      onTap: () => controller.taskPriority.value = PriorityModel.normal,
+                  ),
+                  PriorityTask(
+                      title: "مهم",
+                      selected: controller.taskPriority.value == PriorityModel.height,
+                      onTap: () => controller.taskPriority.value = PriorityModel.height,
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 12),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  controller.addOrEditTask();
+                  },
                 child: const Text("اضافه کردن",style: TextStyle(fontSize: 20,fontFamily: "Dirooz"),),
               ),
             ),

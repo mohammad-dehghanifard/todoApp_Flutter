@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:todo_app_flutter/constants/app_keys/app_keys.dart';
-import 'package:todo_app_flutter/controller/data_base/data_base_controller.dart';
 import 'package:todo_app_flutter/model/priority/priority_model.dart';
 import 'package:todo_app_flutter/model/task/task_model.dart';
 import 'package:todo_app_flutter/view/main/main_screen.dart';

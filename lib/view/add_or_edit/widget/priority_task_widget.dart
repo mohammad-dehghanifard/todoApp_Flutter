@@ -3,15 +3,15 @@ import 'package:flutter/widgets.dart';
 import 'package:todo_app_flutter/constants/colors/app_colors.dart';
 
 class PriorityTask extends StatelessWidget {
-  const PriorityTask({required this.title,Key? key}) : super(key: key);
+   PriorityTask({required this.title,required this.selected,required this.onTap,Key? key}) : super(key: key);
   final String title;
+  final bool selected;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-
-      },
+    return GestureDetector(
+      onTap: onTap,
       child: Container(
         width: 110,
         height: 40,
@@ -22,7 +22,8 @@ class PriorityTask extends StatelessWidget {
         ),
         child: Row(
           children: [
-            const Icon(Icons.check,size: 18,color: Colors.black),
+            if(selected)
+            Icon(Icons.check,size: 18,color: AppColors.lightYellowColor),
             const SizedBox(width: 6),
             Text(title,style: const TextStyle(fontFamily: "Dirooz"),)
           ],
