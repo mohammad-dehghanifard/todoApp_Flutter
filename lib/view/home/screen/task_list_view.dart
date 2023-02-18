@@ -20,18 +20,21 @@ class TaskListView extends StatelessWidget {
       builder: (context, box, child) {
 
         List<TaskModel> items;
-        if(box.isNotEmpty){
-          switch(priority){
-            case PriorityModel.low :
-              items = box.values.where((element) => element.priority == PriorityModel.low).toList();
-              break;
-            case PriorityModel.normal :
-              items = box.values.where((element) => element.priority == PriorityModel.normal).toList();
-              break;
-            case PriorityModel.height :
-              items = box.values.where((element) => element.priority == PriorityModel.height).toList();
-          }
+        switch (priority) {
+          case PriorityModel.low :
+            items = box.values.where((element) => element.priority ==
+                PriorityModel.low).toList();
+            break;
+          case PriorityModel.normal :
+            items = box.values.where((element) => element.priority ==
+                PriorityModel.normal).toList();
+            break;
+          case PriorityModel.height :
+            items = box.values.where((element) => element.priority ==
+                PriorityModel.height).toList();
+        }
 
+        if(items.isNotEmpty){
           return ListView.builder(
             padding: const EdgeInsets.only(top: 16, bottom: 86),
             itemCount: items.length,
@@ -42,7 +45,7 @@ class TaskListView extends StatelessWidget {
         } else{
           return const EmptyState();
         }
-      },
-    );
+
+      });
   }
 }
