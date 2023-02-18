@@ -9,10 +9,10 @@ import 'package:todo_app_flutter/model/task/task_model.dart';
 import 'package:todo_app_flutter/view/home/widgets/custom_check_box_widget.dart';
 
 Widget todoItemWidget(BuildContext context,TaskModel taskItem) {
-  HiveDataBaseController controller = Get.put(HiveDataBaseController());
+  final HiveDataBaseController dbController = Get.find<HiveDataBaseController>();
   return GestureDetector(
     onTap: () => Get.toNamed(RoutePages.addOrEditPageRoute,arguments: taskItem),
-    onLongPress: () => controller.deleteTask(taskItem),
+    onLongPress: () => dbController.deleteTask(taskItem),
     child: Container(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       margin: const EdgeInsets.fromLTRB(12,0,12,16),
@@ -29,7 +29,7 @@ Widget todoItemWidget(BuildContext context,TaskModel taskItem) {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(12),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

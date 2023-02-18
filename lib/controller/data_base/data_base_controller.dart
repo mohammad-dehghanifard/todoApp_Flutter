@@ -1,7 +1,8 @@
-import 'package:flutter/cupertino.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:todo_app_flutter/common/widgets/dialog_widget.dart';
 import 'package:todo_app_flutter/constants/app_keys/app_keys.dart';
 import 'package:todo_app_flutter/model/priority/priority_model.dart';
 import 'package:todo_app_flutter/model/task/task_model.dart';
@@ -52,5 +53,23 @@ class HiveDataBaseController extends GetxController {
 
   deleteTask(TaskModel taskItem) => taskItem.delete();
 
-  deleteAllTask() => box.clear();
+  deleteAllTask(BuildContext context) {
+      if(box.values.isNotEmpty){
+        customAwesomeDialog(
+            context: context,
+            dialogType: DialogType.warning,
+            title: "هشدار",
+            description: "ایا مطمن هستید قصد حذف کردن تمام کارهای خود را دارید؟ کارهای شما بعد از حذف شدن قابل بازیابی نخواهند بود!",
+            okBtnTxt: "نه پشیمون شدم",
+            cancelBtnTxt: "آره حذفشون کن",
+            onTapOk: () {},
+            onTapCancel: () {
+              box.clear();
+            }
+        );
+      } else{
+        showSnackBar(title: "خطا", content: "لیست کارهای شما خالی است!", color: Colors.red);
+      }
+  }
+
 }
