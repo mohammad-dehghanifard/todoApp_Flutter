@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
-import 'package:todo_app_flutter/constants/colors/app_colors.dart';
-import 'package:todo_app_flutter/constants/routes/routs_pages.dart';
+import 'package:todo_app_flutter/common/constants/colors/app_colors.dart';
+import 'package:todo_app_flutter/common/constants/routes/routs_pages.dart';
 import 'package:todo_app_flutter/controller/data_base/data_base_controller.dart';
 import 'package:todo_app_flutter/model/task/task_model.dart';
 import 'package:todo_app_flutter/view/home/widgets/custom_check_box_widget.dart';
@@ -11,14 +11,16 @@ import 'package:todo_app_flutter/view/home/widgets/custom_check_box_widget.dart'
 Widget todoItemWidget(BuildContext context,TaskModel taskItem) {
   final HiveDataBaseController dbController = Get.find<HiveDataBaseController>();
   return GestureDetector(
+    //  زمانی که روی هر کدوم از ایتم ها کلیک بشه کاربر رو به صفحه ویرایش میبریم و به عنوان arguments هم مدل همون ایتمی که روش کلیک شده رو ارسال میکنیم
     onTap: () => Get.toNamed(RoutePages.addOrEditPageRoute,arguments: taskItem),
+    //زمانی که کاربر برای مدت طولانی انگشتش رو روی اتیم نگهداره
     onLongPress: () => dbController.deleteTask(taskItem),
     child: Container(
       margin: const EdgeInsets.fromLTRB(8,0,8,16),
       width: MediaQuery.of(context).size.width,
       height: 100,
       child: Slidable(
-
+        // کشیدن ایتم به سمت راست برای حذف و ویرایش ایتم
         startActionPane: ActionPane(
           motion: const DrawerMotion(),
           extentRatio: 0.4,
@@ -68,6 +70,7 @@ Widget todoItemWidget(BuildContext context,TaskModel taskItem) {
               ),
               CustomCheckBox(taskDone: taskItem.isDone,onTap: () {
                 taskItem.isDone = !taskItem.isDone;
+                // .save() => در کلاس مدل استفاده کردیم به این قابلیت دسترسی داریم HiveObject تغیرات ایتمی که تو دیتابیس هست رو ذخیره میکنه و چون از
                 taskItem.save();
               },)
             ],

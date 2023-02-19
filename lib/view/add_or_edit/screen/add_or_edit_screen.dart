@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:todo_app_flutter/constants/colors/app_colors.dart';
+import 'package:todo_app_flutter/common/constants/colors/app_colors.dart';
 import 'package:todo_app_flutter/controller/data_base/data_base_controller.dart';
 import 'package:todo_app_flutter/model/priority/priority_model.dart';
 import 'package:todo_app_flutter/view/add_or_edit/widget/priority_task_widget.dart';
@@ -18,7 +16,12 @@ class _AddOrEditTodoScreenState extends State<AddOrEditTodoScreen> {
   final HiveDataBaseController dbController = Get.find<HiveDataBaseController>();
   @override
   void initState() {
-    dbController.task = Get.arguments;
+    /*
+    زمانی که صفحه ایجاد میشه مدل داخل کنترلر رو با مدلی که از صفحه قبل ارسال کردیم پر میکنیم.
+    زمانی که روی دکمه ادد داخل صفحه اصلی کلیک بشه مدل خالی ارسال میشه. اما زمانی که رو یکی از ایتم
+    کلیک بشه مدل همون ایتم ارسال میشه تا بتونیم اطلاعاتش رو ویرایش کنیم.
+     */
+    dbController.task = Get.arguments; // Get.arguments => مدلی که از صفحه قبل ارسال کردیم
     dbController.taskTitleTextFieldController.text = dbController.task.title;
     dbController.descriptionTextFieldController.text = dbController.task.description;
     super.initState();
@@ -31,7 +34,7 @@ class _AddOrEditTodoScreenState extends State<AddOrEditTodoScreen> {
       appBar: AppBar(
         title: Text(dbController.task.title == ''? "Add Todo" : "Edit Task"),
         centerTitle: true,
-        backgroundColor: AppColors.lightYellowColor,
+        backgroundColor: AppColors.pinkColor,
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(16,64,16,8),
@@ -42,7 +45,7 @@ class _AddOrEditTodoScreenState extends State<AddOrEditTodoScreen> {
               style: const TextStyle(color: Colors.white,fontFamily: "Dirooz"),
               decoration: InputDecoration(
                   filled: true,
-                  fillColor: AppColors.lightYellowColor,
+                  fillColor: AppColors.pinkColor,
                 hintText: "عنوان را وارد کنید",
                 hintStyle: const TextStyle(fontSize: 14,color: Colors.white,fontFamily: 'Dirooz')
               ),
@@ -57,7 +60,7 @@ class _AddOrEditTodoScreenState extends State<AddOrEditTodoScreen> {
               ),
             ),
             const SizedBox(height: 12),
-            Obx(
+            Obx( //Obx =>رو انجام میده با این تفاوت که فقط یک بخش خاص رو دوباره میسازه و کل صفحه رو از اول درست نمیکنه setState همون کار
               ()=> Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children:  [
@@ -83,6 +86,7 @@ class _AddOrEditTodoScreenState extends State<AddOrEditTodoScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
+                // اضافه یا ویرایش کردن ایتم
                 onPressed: () => dbController.addOrEditTask(),
                 child:  Text(dbController.task.title == "" ?"اضافه کردن" : "ویرایش",style: const TextStyle(fontSize: 20,fontFamily: "Dirooz"),),
               ),

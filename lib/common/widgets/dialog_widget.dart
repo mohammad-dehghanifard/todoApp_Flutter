@@ -1,6 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:todo_app_flutter/constants/colors/app_colors.dart';
+import 'package:todo_app_flutter/common/constants/colors/app_colors.dart';
 
 Future<dynamic> customAwesomeDialog(
     {
